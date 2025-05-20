@@ -55,10 +55,8 @@
             @foreach ($leftSliderNews as $news)
                 <div class="news-card d-flex shadow-sm rounded bg-white mb-2" style="height: 50%; overflow: hidden;">
                     <div class="w-50 p-2">
-                        <a href="{{ route('customer.news.show', $news) }}">
-                            <img src="{{ asset('storage/' . $news->image) }}"
+                        <img src="{{ asset('storage/' . $news->image) }}"
                             class="img-fluid rounded w-100 h-100 object-fit-cover" alt="خبر">
-                        </a>
                     </div>
                     <div class="w-50 p-2 d-flex flex-column justify-content-between overflow-auto">
                         <div>
@@ -122,19 +120,29 @@
     <div class="col-md-4  rounded" style="max-width: 800px; height: auto;">
         <section class="feedback-section">
 
-            @foreach($messages as $message)
+            <!-- نمونه پیام -->
             <div class="feedback-box">
                 <div class="user-message">
                     <h3>حرف مردم</h3>
-                    <p>{{ $message->content }}</p>
+                    <p>لطفاً وضعیت نظافت پارک محله‌مان را پیگیری کنید. چند هفته‌ای هست که رسیدگی نمی‌شود.</p>
                 </div>
                 <div class="admin-response">
                     <h4>پاسخ مسئول</h4>
-                    <p>{{ $message->response }}</p>
+                    <p>موضوع به سازمان خدمات شهری ارجاع داده شده و طی ۴۸ ساعت آینده رسیدگی خواهد شد.</p>
                 </div>
             </div>
-            @endforeach
 
+            <!-- نمونه بعدی -->
+            <div class="feedback-box">
+                <div class="user-message">
+                    <h3>حرف مردم</h3>
+                    <p>چرا سرعت اینترنت در منطقه ما ضعیفه؟ لطفاً بررسی کنید.</p>
+                </div>
+                <div class="admin-response">
+                    <h4>پاسخ مسئول</h4>
+                    <p>با شرکت مخابرات تماس گرفتیم؛ تجهیزات در حال به‌روزرسانی است و به‌زودی بهبود خواهد یافت.</p>
+                </div>
+            </div>
 
         </section>
 

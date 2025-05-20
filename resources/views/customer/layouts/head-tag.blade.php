@@ -6,10 +6,10 @@
 
 
     <!-- Bootstrap RTL CSS -->
-<link href="assets/css/bootstrap.rtl.min.css" rel="stylesheet" integrity="sha384-...">
-<link rel="stylesheet" href="assets/css/all.min.css" integrity="sha384-...">  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel-rtl/">
+<link href="{{ asset('assets/css/bootstrap.rtl.min.css') }}" rel="stylesheet" integrity="sha384-...">
+<link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}" integrity="sha384-...">  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel-rtl/">
 
-<link rel="stylesheet" href="assets/css/scroll-top.css">
+<link rel="stylesheet" href="{{ asset('assets/css/scroll-top.css') }}">
 
 <!-- Favicons -->
 <link rel="apple-touch-icon" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}" sizes="180x180">
@@ -21,10 +21,10 @@
 <meta name="theme-color" content="#712cf9">
 
 <!-- Custom styles for this template -->
-<link href="assets/css/carousel.rtl.css" rel="stylesheet">
+<link href="{{ asset('assets/css/carousel.rtl.css') }}" rel="stylesheet">
 
 <!-- font awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- Your custom CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">

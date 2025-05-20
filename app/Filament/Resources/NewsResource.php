@@ -33,10 +33,20 @@ class NewsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'مدیریت محتوای خبر';
+    protected static ?string $modelLabel = 'اخبار';         // عنوان مفرد
+    protected static ?string $pluralLabel = 'اخبار';          // جمع
+    protected static ?string $navigationLabel = 'اخبار';      // عنوان در سایدبار
+
+
     public static function form(Form $form): Form
 {
     return $form
         ->schema([
+            TextInput::make('on_titr')
+                ->label('روتیتر')
+                ->maxLength(255),
+
             TextInput::make('title')
                 ->label('عنوان')
                 ->required()
@@ -48,12 +58,20 @@ class NewsResource extends Resource
                 ->required(),
 
             TextInput::make('subtitle')
-                ->label('زیرعنوان')
+                ->label('لید')
                 ->maxLength(255),
+
+                Select::make('content_type')
+                    ->label('نوع مطلب')
+                    ->options(\App\Models\News::CONTENT_TYPES)
+                    ->required()
+                    ->searchable()
+                    ->native(false),
 
             Textarea::make('meta_description')
                 ->label('توضیحات متا')
-                ->rows(2),
+                ->rows(2)
+                ->columnSpan('full'),
 
             RichEditor::make('body')
                 ->label('محتوا')
@@ -65,11 +83,11 @@ class NewsResource extends Resource
                 ->image()
                 ->directory('thumbnails'),
 
-            // Select::make('category_id')
-            //     ->label('دسته‌بندی')
-            //     ->relationship('category', 'name')
-            //     ->searchable()
-            //     ->required(),
+            Select::make('category_id')
+                ->label('دسته‌بندی')
+                ->options(\App\Models\Category::pluck('title', 'id'))
+                ->searchable()
+                ->required(),
 
             // Select::make('author_id')
             //     ->label('نویسنده')
@@ -103,6 +121,7 @@ class NewsResource extends Resource
                     ->options([
                         'slider_bottom' => 'پایین اسلایدر',
                         'slider_side' => 'سمت چپ اسلایدر',
+                        'slider' => 'اسلایدر',
                     ])
                     ->default('slider_bottom'),
 
@@ -143,11 +162,29 @@ public static function table(Table $table): Table
                         0 => 'پیش‌نویس',
                         1 => 'منتشر شده',
                         2 => 'آرشیو شده',
-                        default => 'نامشخص',
+                        default => 1,
                     };
                 }),
             // ToggleColumn::make('is_featured')
             //     ->label('ویژه؟'),
+
+
+            BadgeColumn::make('position')
+                ->label('موقعیت')
+                ->colors([
+                    'slider' => 'اسلایدر',
+                    'slider_side' => 'خبر کنار اسلایدر',
+                    'slider_bottom' => 'خبر پایین اسلایدر',
+                ])
+                ->formatStateUsing(function ($state) {
+                    return match ($state) {
+                        'slider' => 'اسلایدر',
+                    'slider_side' => 'خبر کنار اسلایدر',
+                    'slider_bottom' => 'خبر پایین اسلایدر',
+                        default => 'نامشخص',
+                    };
+                }),
+
 
             TextColumn::make('published_at')
                 ->label('تاریخ انتشار')
@@ -182,6 +219,25 @@ public static function table(Table $table): Table
             'index' => Pages\ListNews::route('/'),
             'create' => Pages\CreateNews::route('/create'),
             'edit' => Pages\EditNews::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getNavigationItems(): array
+    {
+        return [
+            // لینک لیست اخبار
+            \Filament\Navigation\NavigationItem::make()
+                ->label('اخبار')
+                ->url(static::getUrl())
+                ->group(static::$navigationGroup)
+                ->icon('heroicon-o-newspaper'),
+
+            // لینک ایجاد خبر جدید
+            \Filament\Navigation\NavigationItem::make()
+                ->label('ایجاد خبر جدید')
+                ->url(static::getUrl('create'))
+                ->group(static::$navigationGroup)
+                ->icon('heroicon-o-plus-circle'),
         ];
     }
 }

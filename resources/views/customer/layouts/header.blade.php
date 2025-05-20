@@ -1,11 +1,22 @@
+
 <div class="container-fluid">
-    <a class="navbar-brand" href="#">
-        <img src="assets/img/logo.png" alt="لوگو" class="navbar-logo">
-    </a>
+    @if($setting->logo_type == 'image')
+        <a class="navbar-brand" href="{{ env('APP_URL') }}">
+            <img src="{{ env('APP_URL') . '/storage/' . $setting->logo_image }}" alt="لوگو" class="navbar-logo">
+        </a>
+    @else
+        <a class="navbar-brand" href="{{ env('APP_URL') }}">
+            <p>{{ $setting->logo_text }}</p>
+        </a>
+    @endif
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="تبدیل ناوبری">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+
+
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">

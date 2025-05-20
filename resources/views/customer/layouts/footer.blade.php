@@ -23,11 +23,17 @@
     <div class="col-md-4 mb-3">
         <h5>ما را دنبال کنید</h5>
         <div>
-            <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-instagram">عصراترک</i></a>
+                    <ul class="list-unstyled">
+            <li><a href="https://asreatrak.ir/" class="footer-link">عصراترک</a></li>
+            <li><a href="yjc.ir" class="footer-link">باشگاه خبرنگاران جوان</a></li>
+            {{-- <li><a href="#" class="footer-link">درباره ما</a></li>
+            <li><a href="#" class="footer-link">تماس با ما</a></li> --}}
+        </ul>
+            {{-- <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-instagram"></i></a>
             <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-telegram">باشگاه خبرنگاران
                     جوان</i></a>
             <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="footer-link fs-4"><i class="bi bi-github"></i></a>
+            <a href="#" class="footer-link fs-4"><i class="bi bi-github"></i></a> --}}
         </div>
     </div>
 </div>
