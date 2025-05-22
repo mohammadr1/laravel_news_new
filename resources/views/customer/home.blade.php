@@ -13,6 +13,7 @@
             <div id="myCarousel" class="carousel slide h-100" data-bs-ride="carousel">
                 <div class="carousel-inner h-100">
                     @foreach($sliders as $index => $slider)
+                    <a href="{{ route('customer.news.show', $slider) }}">
                     <div class="carousel-item h-100 @if($index === 0) active @endif">
                         <img src="{{ asset('storage/' . $slider->image) }}" class="d-block w-100 h-100"
                             alt="{{ $slider->title }}" style="object-fit: cover;">
@@ -34,6 +35,7 @@
                             @endif
                         </div>
                     </div>
+                    </a>
                     @endforeach
                 </div>
 
@@ -62,8 +64,8 @@
                     </div>
                     <div class="w-50 p-2 d-flex flex-column justify-content-between overflow-auto">
                         <div>
-                            <span class="badge bg-danger mb-1">فوری</span>
-                            <h6 class="news-title mb-1 small">{{ $news->title }}</h6>
+                            <span class="badge bg-danger mb-1">{{ $news->category->title }}</span>
+                            <h6 class="news-title mb-1 small"><a href="{{ route('customer.news.show', $news) }}">{{ $news->title }}</a></h6>
                             <div class="news-meta small text-muted">
                                 <span><i class="far fa-clock me-1"></i>{{ jdate($news->published_at)->format('Y/m/d') }}</span><br>
                                 <span><i class="far fa-user me-1"></i>{{ $news->author->name ?? 'نامشخص' }}</span>
@@ -98,10 +100,11 @@
                 <img src="{{ asset('storage/' . $news->image) }}" class="img-fluid rounded-3 shadow-sm" alt="تصویر خبر">
             </div>
             <div class="col-md-8">
+                <a href="{{ route('customer.news.show', $news) }}">
                 <div class="news-content">
                     <span class="badge bg-danger mb-2">فوری</span>
                     <h5 class="news-title text-dark">{{ $news->title }}</h5>
-                    <p>{{ Str::limit(trim(str_replace('&nbsp;', ' ', strip_tags($news->body))), 150, '[...]') }}</p>
+                    <p class="text-black">{{ Str::limit(trim(str_replace('&nbsp;', ' ', strip_tags($news->body))), 150, '[...]') }}</p>
                     <div class="news-meta mt-3">
                         <span class="news-date text-muted">
                             <i class="far fa-clock me-1"></i> {{ jdate($news->published_at)->format('Y/m/d') }}
@@ -113,6 +116,7 @@
                     {{-- <a href="{{ route('news.show', $news->slug) }}" class="btn btn-sm btn-primary mt-3">مشاهده کامل
                     خبر</a> --}}
                 </div>
+            </a>
             </div>
         </div>
         @endforeach

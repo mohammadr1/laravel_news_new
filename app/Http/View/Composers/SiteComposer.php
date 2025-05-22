@@ -7,12 +7,14 @@ use App\Models\News;
 use App\Models\Message;
 use App\Models\SiteSetting;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class SiteComposer
 {
     public function compose(View $view)
     {
         $sliders = News::where('position', 'slider')
+            ->where('status', 1)
             ->where('published_at', '<=', Carbon::now('Asia/Tehran'))
             ->orderBy('published_at', 'desc')
             ->get();
@@ -32,6 +34,7 @@ class SiteComposer
             ->get();
 
         $messages = Message::where('status', true)
+            ->where('status', 1)
             ->where('published_at', '<=', now())
             ->latest()
             ->take(2)
@@ -39,6 +42,16 @@ class SiteComposer
 
         $setting = SiteSetting::first();
 
-        $view->with(compact('sliders', 'leftSliderNews', 'bottomSliderNews', 'messages', 'setting'));
+
+    // decode JSON to array
+    $socials = $setting->footer_social_links;
+
+    // اضافه کردن https:// به URLهایی که ندارن
+    foreach ($socials as &$social) {
+        if (!Str::startsWith($social['url'], ['http://', 'https://'])) {
+            $social['url'] = 'https://' . $social['url'];
+        }
+    }
+        $view->with(compact('sliders', 'leftSliderNews', 'bottomSliderNews', 'messages', 'setting', 'socials'));
     }
 }

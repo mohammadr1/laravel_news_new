@@ -3,8 +3,7 @@
     <div class="col-md-4 mb-3">
         <h5>درباره ما</h5>
         <p class="small">
-            ما یک تیم توسعه نرم‌افزار هستیم که روی پروژه‌های خلاقانه و مدرن کار می‌کنیم. هدف ما ساخت بهترین
-            تجربه برای کاربران است.
+           {{ $setting->footer_about }}
         </p>
     </div>
 
@@ -23,12 +22,15 @@
     <div class="col-md-4 mb-3">
         <h5>ما را دنبال کنید</h5>
         <div>
-                    <ul class="list-unstyled">
-            <li><a href="https://asreatrak.ir/" class="footer-link">عصراترک</a></li>
-            <li><a href="yjc.ir" class="footer-link">باشگاه خبرنگاران جوان</a></li>
-            {{-- <li><a href="#" class="footer-link">درباره ما</a></li>
-            <li><a href="#" class="footer-link">تماس با ما</a></li> --}}
-        </ul>
+            <ul class="list-unstyled">
+                @foreach($socials as $social)
+                    <li>
+                        <a href="{{ $social['url'] }}" target="_blank" class="footer-link" rel="noopener noreferrer">
+                            {{ $social['platform'] }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
             {{-- <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-instagram"></i></a>
             <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-telegram">باشگاه خبرنگاران
                     جوان</i></a>
