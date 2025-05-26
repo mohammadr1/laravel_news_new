@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="fa" dir="rtl" data-bs-theme="auto">
-
 <head>
-
     @include('customer.layouts.head-tag')
     @yield('head-tag')
 

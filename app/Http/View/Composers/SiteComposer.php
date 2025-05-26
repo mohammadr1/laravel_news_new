@@ -42,11 +42,10 @@ class SiteComposer
 
         $setting = SiteSetting::first();
 
-
     // decode JSON to array
     $socials = $setting->footer_social_links;
 
-    // اضافه کردن https:// به URLهایی که ندارن
+    // add https to url
     foreach ($socials as &$social) {
         if (!Str::startsWith($social['url'], ['http://', 'https://'])) {
             $social['url'] = 'https://' . $social['url'];

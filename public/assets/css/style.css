@@ -13,10 +13,73 @@ body {
          url('/fonts/iransans/IRANSansWeb.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+  }
+@font-face {
+    font-family: 'vazir';
+    src: url('/fonts/vazir/Vazir-Thin-FD-WOL.woff') format('woff'),
+         url('/fonts/vazir/Vazir-Thin-FD-WOL.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
 }
 
+@font-face {
+    font-family: 'vazir';
+    src: url('/fonts/vazir/Vazir-Light-FD-WOL.woff') format('woff'),
+         url('/fonts/vazir/Vazir-Light-FD-WOL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'vazir';
+    src: url('/fonts/vazir/Vazir-FD-WOL.woff') format('woff'),
+         url('/fonts/vazir/Vazir-FD-WOL.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'vazir';
+    src: url('/fonts/vazir/Vazir-Medium-FD-WOL.woff') format('woff'),
+         url('/fonts/vazir/Vazir-Medium-FD-WOL.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'vazir';
+    src: url('/fonts/vazir/Vazir-Bold-FD-WOL.woff') format('woff'),
+         url('/fonts/vazir/Vazir-Bold-FD-WOL.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+
+
+body {
+    font-family: 'vazir', sans-serif;
+    font-weight: 400; حالت نرمال
+}
+
+h1 {
+    font-weight: 700; بولد
+}
+
+.light-text {
+    font-weight: 300; لایت
+}
+
+
+*/
+
 * , p, span, a{
-    font-family: 'IRANSans', sans-serif !important;
+    font-family: 'vazir', sans-serif !important;
     text-decoration: none !important;
 }
 
@@ -213,3 +276,64 @@ body {
 body {
     padding-top: 32px; /* جا باز می‌کنه برای نوار بالا */
 }
+
+
+
+
+
+
+/* start style shadow in box */
+.feedback-section {
+                max-width: 800px;
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .feedback-box {
+                background-color: #fff;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+                overflow: hidden;
+                padding: 1.5rem;
+                transition: all 0.3s ease;
+            }
+
+            .feedback-box:hover {
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .user-message {
+                margin-bottom: 1rem;
+            }
+
+            .user-message h3 {
+                margin: 0;
+                font-size: 1.1rem;
+                color: #007bff;
+            }
+
+            .user-message p {
+                margin: 0.5rem 0 0;
+            }
+
+            .admin-response {
+                background-color: #eef6f0;
+                border-right: 4px solid #28a745;
+                padding: 1rem;
+                border-radius: 12px;
+                margin-top: 1rem;
+            }
+
+            .admin-response h4 {
+                margin: 0;
+                color: #28a745;
+                font-size: 1rem;
+            }
+
+            .admin-response p {
+                margin: 0.5rem 0 0;
+            }
+
+/* end style shadow in box */

@@ -14,10 +14,10 @@
                 <div class="carousel-inner h-100">
                     @foreach($sliders as $index => $slider)
                     <a href="{{ route('customer.news.show', $slider) }}">
-                    <div class="carousel-item h-100 @if($index === 0) active @endif">
-                        <img src="{{ asset('storage/' . $slider->image) }}" class="d-block w-100 h-100"
-                            alt="{{ $slider->title }}" style="object-fit: cover;">
-                        <div class="position-absolute bottom-0 w-100 p-3" style="
+                        <div class="carousel-item h-100 @if($index === 0) active @endif">
+                            <img src="{{ asset('storage/' . $slider->image) }}" class="d-block w-100 h-100"
+                                alt="{{ $slider->title }}" style="object-fit: cover;">
+                            <div class="position-absolute bottom-0 w-100 p-3" style="
                             background-color: rgba(0,0,0,0.6);
                             color: white;
                             max-height: 45%;
@@ -26,15 +26,15 @@
                             direction: rtl;
                             border-top-left-radius: 10px;
                             border-top-right-radius: 10px;">
-                            <h5 class="mb-2">{{ $slider->title }}</h5>
-                            @if($slider->publish_date)
-                            <p class="mb-1">{{ jdate($slider->publish_date)->format('j F Y') }}</p>
-                            @endif
-                            @if($slider->subtitle)
-                            <p class="mb-0" style="word-wrap: break-word;">{{ $slider->subtitle }}</p>
-                            @endif
+                                <h5 class="mb-2">{{ $slider->title }}</h5>
+                                @if($slider->publish_date)
+                                <p class="mb-1">{{ jdate($slider->publish_date)->format('j F Y') }}</p>
+                                @endif
+                                @if($slider->subtitle)
+                                <p class="mb-0" style="word-wrap: break-word;">{{ $slider->subtitle }}</p>
+                                @endif
+                            </div>
                         </div>
-                    </div>
                     </a>
                     @endforeach
                 </div>
@@ -51,37 +51,38 @@
             </div>
         </div>
     </div>
-    <!-- دو خبر کناری -->
+    {{-- news items next to the slider --}}
     <div class="col-12 col-md-4">
         <div class="d-flex flex-column" style="height: 350px;">
             @foreach ($leftSliderNews as $news)
-                <div class="news-card d-flex shadow-sm rounded bg-white mb-2" style="height: 50%; overflow: hidden;">
-                    <div class="w-50 p-2">
-                        <a href="{{ route('customer.news.show', $news) }}">
-                            <img src="{{ asset('storage/' . $news->image) }}"
+            <div class="news-card d-flex shadow-sm rounded bg-white mb-2" style="height: 50%; overflow: hidden;">
+                <div class="w-50 p-2">
+                    <a href="{{ route('customer.news.show', $news) }}">
+                        <img src="{{ asset('storage/' . $news->image) }}"
                             class="img-fluid rounded w-100 h-100 object-fit-cover" alt="خبر">
-                        </a>
-                    </div>
-                    <div class="w-50 p-2 d-flex flex-column justify-content-between overflow-auto">
-                        <div>
-                            <span class="badge bg-danger mb-1">{{ $news->category->title }}</span>
-                            <h6 class="news-title mb-1 small"><a href="{{ route('customer.news.show', $news) }}">{{ $news->title }}</a></h6>
-                            <div class="news-meta small text-muted">
-                                <span><i class="far fa-clock me-1"></i>{{ jdate($news->published_at)->format('Y/m/d') }}</span><br>
-                                <span><i class="far fa-user me-1"></i>{{ $news->author->name ?? 'نامشخص' }}</span>
-                            </div>
+                    </a>
+                </div>
+                <div class="w-50 p-2 d-flex flex-column justify-content-between overflow-auto">
+                    <div>
+                        <span class="badge bg-danger mb-1">{{ $news->category->title }}</span>
+                        <h6 class="news-title mb-1 small"><a class="text-black"
+                                href="{{ route('customer.news.show', $news) }}">{{ $news->title }}</a></h6>
+                        <div class="news-meta small text-muted">
+                            <span><i
+                                    class="far fa-clock me-1"></i>{{ jdate($news->published_at)->format('Y/m/d') }}</span><br>
+                            <span><i class="far fa-user me-1"></i>{{ $news->author->name ?? 'نامشخص' }}</span>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
-
             {{-- اگر فقط یک خبر وجود دارد، جای خالی را پر کن --}}
             @if ($leftSliderNews->count() == 1)
-                <div class="news-card d-flex shadow-sm rounded bg-light mb-2" style="height: 50%; opacity: 0.3;">
-                    {{-- <div class="w-100 d-flex justify-content-center align-items-center text-muted">
+            <div class="news-card d-flex shadow-sm rounded bg-light mb-2" style="height: 50%; opacity: 0.3;">
+                {{-- <div class="w-100 d-flex justify-content-center align-items-center text-muted">
                         <span>خبر دیگری موجود نیست</span>
                     </div> --}}
-                </div>
+            </div>
             @endif
         </div>
     </div>
@@ -101,103 +102,52 @@
             </div>
             <div class="col-md-8">
                 <a href="{{ route('customer.news.show', $news) }}">
-                <div class="news-content">
-                    <span class="badge bg-danger mb-2">فوری</span>
-                    <h5 class="news-title text-dark">{{ $news->title }}</h5>
-                    <p class="text-black">{{ Str::limit(trim(str_replace('&nbsp;', ' ', strip_tags($news->body))), 150, '[...]') }}</p>
-                    <div class="news-meta mt-3">
-                        <span class="news-date text-muted">
-                            <i class="far fa-clock me-1"></i> {{ jdate($news->published_at)->format('Y/m/d') }}
-                        </span>
-                        <span class="news-author text-muted ms-3">
-                            <i class="far fa-user me-1"></i> نویسنده: {{ $news->author->name ?? 'نامشخص' }}
-                        </span>
-                    </div>
-                    {{-- <a href="{{ route('news.show', $news->slug) }}" class="btn btn-sm btn-primary mt-3">مشاهده کامل
-                    خبر</a> --}}
-                </div>
+                    <div class="news-content">
+                        <span class="badge bg-danger mb-2">فوری</span>
+                        <h5 class="news-title text-dark">{{ $news->title }}</h5>
+                        <p class="text-black">
+                            {{ Str::limit(trim(str_replace('&nbsp;', ' ', strip_tags($news->body))), 150, '[...]') }}
+                        </p>
+                        <div class="news-meta mt-3">
+                            <span class="news-date text-muted">
+                                <i class="far fa-clock me-1"></i> {{ jdate($news->published_at)->format('Y/m/d') }}
+                            </span>
+                            <span class="news-author text-muted ms-3">
+                                <i class="far fa-user me-1"></i> نویسنده: {{ $news->author->name ?? 'نامشخص' }}
+                            </span>
+                        </div>
+                        {{-- <a href="{{ route('news.show', $news->slug) }}" class="btn btn-sm btn-primary mt-3">مشاهده
+                        کامل
+                        خبر
+                </a> --}}
+            </div>
             </a>
+        </div>
+    </div>
+    @endforeach
+</div>
+
+<!-- بخش کناری -->
+<div class="col-md-4  rounded" style="max-width: 800px; height: auto;">
+    <section class="feedback-section">
+
+        @foreach($messages as $message)
+        <div class="feedback-box">
+            <div class="user-message">
+                <h3>حرف مردم</h3>
+                <p>{{ $message->content }}</p>
+            </div>
+            <div class="admin-response">
+                <h4>پاسخ مسئول</h4>
+                <p>{{ $message->response }}</p>
             </div>
         </div>
         @endforeach
-    </div>
-
-    <!-- بخش کناری -->
-    <div class="col-md-4  rounded" style="max-width: 800px; height: auto;">
-        <section class="feedback-section">
-
-            @foreach($messages as $message)
-            <div class="feedback-box">
-                <div class="user-message">
-                    <h3>حرف مردم</h3>
-                    <p>{{ $message->content }}</p>
-                </div>
-                <div class="admin-response">
-                    <h4>پاسخ مسئول</h4>
-                    <p>{{ $message->response }}</p>
-                </div>
-            </div>
-            @endforeach
 
 
-        </section>
+    </section>
 
-        <style>
-            .feedback-section {
-                max-width: 800px;
-                margin: auto;
-                display: flex;
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .feedback-box {
-                background-color: #fff;
-                border-radius: 16px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-                overflow: hidden;
-                padding: 1.5rem;
-                transition: all 0.3s ease;
-            }
-
-            .feedback-box:hover {
-                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-            }
-
-            .user-message {
-                margin-bottom: 1rem;
-            }
-
-            .user-message h3 {
-                margin: 0;
-                font-size: 1.1rem;
-                color: #007bff;
-            }
-
-            .user-message p {
-                margin: 0.5rem 0 0;
-            }
-
-            .admin-response {
-                background-color: #eef6f0;
-                border-right: 4px solid #28a745;
-                padding: 1rem;
-                border-radius: 12px;
-                margin-top: 1rem;
-            }
-
-            .admin-response h4 {
-                margin: 0;
-                color: #28a745;
-                font-size: 1rem;
-            }
-
-            .admin-response p {
-                margin: 0.5rem 0 0;
-            }
-
-        </style>
-    </div>
+</div>
 
 
 </div>
