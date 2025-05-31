@@ -17,4 +17,8 @@ class Category extends Model
 
     ];
 
+    public function news()
+    {
+        return $this->hasMany(\App\Models\News::class);
+    }
 }

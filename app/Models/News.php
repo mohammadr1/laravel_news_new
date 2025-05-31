@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Container\Attributes\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -58,8 +60,22 @@ class News extends Model
         return $this->belongsTo(User::class, 'author_id');
     }
 
-    // public function tags()
-    // {
-    //     return $this->belongsToMany(Tag::class);
-    // }
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($news) {
+            do {
+                $code = Str::random(6);
+            } while (News::where('short_link', $code)->exists());
+
+            $news->short_link = $code;
+        });
+    }
 }

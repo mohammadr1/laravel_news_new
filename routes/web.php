@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\customer\NewsController;
 use App\Http\Controllers\ProfileController;
+use App\Models\News;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,5 +24,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+Route::get('/s/{code}', function ($code) {
+    $news = News::where('short_link', $code)->firstOrFail();
+    return redirect()->route('customer.news.show', $news);
+})->name('short.redirect');
 
 require __DIR__.'/auth.php';

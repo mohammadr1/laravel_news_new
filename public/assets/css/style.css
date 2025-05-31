@@ -9,15 +9,15 @@ body {
 
   @font-face {
     font-family: 'IRANSans';
-    src: url('/fonts/iransans/IRANSansWeb.woff2') format('woff2'),
-         url('/fonts/iransans/IRANSansWeb.woff') format('woff');
+    src: url('/assets/fonts/iransans/IRANSansWeb.woff2') format('woff2'),
+         url('/assets/fonts/iransans/IRANSansWeb.woff') format('woff');
     font-weight: normal;
     font-style: normal;
   }
 @font-face {
     font-family: 'vazir';
-    src: url('/fonts/vazir/Vazir-Thin-FD-WOL.woff') format('woff'),
-         url('/fonts/vazir/Vazir-Thin-FD-WOL.woff2') format('woff2');
+    src: url('/assets/fonts/vazir/Vazir-Thin-FD-WOL.woff') format('woff'),
+         url('/assets/fonts/vazir/Vazir-Thin-FD-WOL.woff2') format('woff2');
     font-weight: 100;
     font-style: normal;
     font-display: swap;
@@ -25,8 +25,8 @@ body {
 
 @font-face {
     font-family: 'vazir';
-    src: url('/fonts/vazir/Vazir-Light-FD-WOL.woff') format('woff'),
-         url('/fonts/vazir/Vazir-Light-FD-WOL.woff2') format('woff2');
+    src: url('/assets/fonts/vazir/Vazir-Light-FD-WOL.woff') format('woff'),
+         url('/assets/fonts/vazir/Vazir-Light-FD-WOL.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -34,8 +34,8 @@ body {
 
 @font-face {
     font-family: 'vazir';
-    src: url('/fonts/vazir/Vazir-FD-WOL.woff') format('woff'),
-         url('/fonts/vazir/Vazir-FD-WOL.woff2') format('woff2');
+    src: url('/assets/fonts/vazir/Vazir-FD-WOL.woff') format('woff'),
+         url('/assets/fonts/vazir/Vazir-FD-WOL.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -43,8 +43,8 @@ body {
 
 @font-face {
     font-family: 'vazir';
-    src: url('/fonts/vazir/Vazir-Medium-FD-WOL.woff') format('woff'),
-         url('/fonts/vazir/Vazir-Medium-FD-WOL.woff2') format('woff2');
+    src: url('/assets/fonts/vazir/Vazir-Medium-FD-WOL.woff') format('woff'),
+         url('/assets/fonts/vazir/Vazir-Medium-FD-WOL.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -52,8 +52,8 @@ body {
 
 @font-face {
     font-family: 'vazir';
-    src: url('/fonts/vazir/Vazir-Bold-FD-WOL.woff') format('woff'),
-         url('/fonts/vazir/Vazir-Bold-FD-WOL.woff2') format('woff2');
+    src: url('/assets/fonts/vazir/Vazir-Bold-FD-WOL.woff') format('woff'),
+         url('/assets/fonts/vazir/Vazir-Bold-FD-WOL.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;

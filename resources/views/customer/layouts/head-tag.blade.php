@@ -12,19 +12,21 @@
 <link rel="stylesheet" href="{{ asset('assets/css/scroll-top.css') }}">
 
 <!-- Favicons -->
-<link rel="apple-touch-icon" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}" sizes="180x180">
-<link rel="icon" href="{{ asset('assets/img/favicons/favicon-32x32.png') }}" sizes="32x32" type="image/png">
-<link rel="icon" href="{{ asset('assets/img/favicons/favicon-16x16.png') }}" sizes="16x16" type="image/png">
-<link rel="manifest" href="{{ asset('assets/img/favicons/manifest.json') }}">
-<link rel="mask-icon" href="{{ asset('assets/img/favicons/safari-pinned-tab.svg') }}" color="#712cf9">
-<link rel="icon" href="{{ asset('assets/img/favicons/favicon.ico') }}">
-<meta name="theme-color" content="#712cf9">
+{{-- <link rel="apple-touch-icon" href="{{ asset('assets/img/favicons/apple-touch-icon.png') }}" sizes="180x180">
+<link rel="icon" href="{{ asset('/assets/img/favicons/favicon-32x32.png') }}" sizes="32x32" type="image/png">
+<link rel="icon" href="{{ asset('/assets/img/favicons/favicon-16x16.png') }}" sizes="16x16" type="image/png">
+<link rel="manifest" href="{{ asset('/assets/img/favicons/manifest.json') }}">
+<link rel="mask-icon" href="{{ asset('/assets/img/favicons/safari-pinned-tab.svg') }}" color="#712cf9">
+<meta name="theme-color" content="#712cf9"> --}}
+<link rel="icon" href="{{ asset('favicon.ico') }}">
 
 <!-- Custom styles for this template -->
 <link href="{{ asset('assets/css/carousel.rtl.css') }}" rel="stylesheet">
 
 <!-- font awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+{{-- <link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome/css/all.min.css') }}"> --}}
+<link rel="stylesheet" href="{{ asset('assets/fonts/fontawesome/css/all.min.css') }}">
 <!-- Your custom CSS -->
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">

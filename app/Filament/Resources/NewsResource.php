@@ -26,6 +26,7 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\NewsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NewsResource\RelationManagers;
+use Illuminate\Support\Str;
 
 class NewsResource extends Resource
 {
@@ -39,7 +40,7 @@ class NewsResource extends Resource
     protected static ?string $navigationLabel = 'اخبار';      // عنوان در سایدبار
 
 
-    public static function form(Form $form): Form
+public static function form(Form $form): Form
 {
     return $form
         ->schema([
@@ -127,9 +128,14 @@ class NewsResource extends Resource
 
 
                 Hidden::make('author_id')
-                    ->default(fn () => auth()->id())
+                    ->default(fn () => auth()->id()),
+
+                Hidden::make('short_link'),
         ]);
+
+
 }
+
 
 public static function table(Table $table): Table
 {

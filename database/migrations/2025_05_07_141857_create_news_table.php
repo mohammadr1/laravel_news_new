@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('subtitle')->nullable();
             $table->string('content_type')->nullable(); // یا بعد از هر ستون دیگری که مدنظرت هست
             $table->string('image')->nullable();
+            $table->string('short_link')->nullable();
             $table->text('body')->nullable();
             $table->string('meta_description')->nullable();
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
