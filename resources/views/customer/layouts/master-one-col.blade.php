@@ -49,7 +49,7 @@ updateDateTime();
     @include('customer.layouts.theme')
 
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top p-0">
             @include('customer.layouts.header')
         </nav>
     </header>
@@ -83,6 +83,7 @@ updateDateTime();
     </button>
 
     @include('customer.layouts.scripts')
+    @yield('scripts')
 </body>
 
 </html>

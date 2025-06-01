@@ -153,14 +153,17 @@
 </div>
 
 <section class="media-section">
+    @if($media->media_type === 'image')
+    <img src="{{ asset('storage/' . $dailyMedia->media_path) }}" alt="{{ $dailyMedia->title }}">
     <!-- تصویر -->
     <div class="media-box">
         <div class="media-header">تصویر شاخص روز</div>
         <div class="media-content">
-            <img src="{{ asset('assets/img/test.jpg') }}" alt="تصویر نمونه">
+            <img src="{{ asset('storage/' . $dailyMedia->media_path) }}" alt="{{ $dailyMedia->title }}">
+            {{-- <img src="{{ asset('assets/img/test.jpg') }}" alt="تصویر نمونه"> --}}
         </div>
     </div>
-
+@endif
     <!-- ویدیو -->
     <div class="media-box">
         <div class="media-header">ویدیو شاخص روز</div>
@@ -172,6 +175,52 @@
         </div>
     </div>
 </section>
+
+
+
+
+
+
+{{-- start pishnehadi --}}
+
+@if($media)
+    <div class="daily-media">
+        <h2>{{ $media->title }}</h2>
+        <p>{{ $media->lead }}</p>
+
+        @if($media->media_type === 'image')
+            <img src="{{ asset('storage/' . $media->media_path) }}" alt="{{ $media->title }}" style="max-width: 100%;">
+        @elseif($media->media_type === 'video')
+            @if(Str::startsWith($media->media_path, ['http', 'https']))
+                {{-- ویدیو از لینک خارجی (یوتیوب، آپارات و...) --}}
+                <div class="video-wrapper">
+                    <iframe
+                        src="{{ convertToEmbed($media->media_path) }}"
+                        frameborder="0"
+                        allowfullscreen
+                        style="width: 100%; aspect-ratio: 16/9;">
+                    </iframe>
+                </div>
+            @else
+                {{-- ویدیو آپلودی --}}
+                <video controls style="max-width: 100%;">
+                    <source src="{{ asset('storage/' . $media->media_path) }}" type="video/mp4">
+                    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
+                </video>
+            @endif
+        @endif
+    </div>
+@endif
+
+{{-- end pishnehadi --}}
+
+
+
+
+
+
+
+
 
 
 <style>

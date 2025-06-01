@@ -7,6 +7,7 @@ use App\Models\News;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DailyMedia;
 use App\Models\Message;
 use App\Models\SiteSetting;
 use Illuminate\Support\Str;
@@ -51,6 +52,15 @@ class HomeController extends Controller
     //     }
     // }
 
-    return view('customer.home');
+        $media = DailyMedia::where('status', true)
+            ->where(function ($query) {
+                $query->whereNull('published_at')
+                      ->orWhere('published_at', '<=', now());
+            })
+            ->orderByDesc('published_at')
+            ->first();
+
+
+    return view('customer.home', compact('media'));
     }
 }

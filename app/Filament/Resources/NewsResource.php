@@ -77,7 +77,9 @@ public static function form(Form $form): Form
             RichEditor::make('body')
                 ->label('محتوا')
                 ->required()
-                ->columnSpan('full'), // این خط باعث می‌شه تمام عرض فرم رو بگیره
+                ->fileAttachmentsDisk('public') // اگر فایل‌ها رو ذخیره می‌کنی
+                ->fileAttachmentsDirectory('uploads/news') // محل ذخیره عکس‌ها
+                ->columnSpanFull(),
 
             FileUpload::make('image')
                 ->label('تصویر شاخص')
