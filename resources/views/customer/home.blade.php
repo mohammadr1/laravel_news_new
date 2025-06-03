@@ -153,66 +153,54 @@
 </div>
 
 <section class="media-section">
-    @if($media->media_type === 'image')
-    <img src="{{ asset('storage/' . $dailyMedia->media_path) }}" alt="{{ $dailyMedia->title }}">
-    <!-- تصویر -->
+
+    {{-- تصویر شاخص روز --}}
+    @if($media_image && $media_image->media_type === 'image')
     <div class="media-box">
         <div class="media-header">تصویر شاخص روز</div>
         <div class="media-content">
-            <img src="{{ asset('storage/' . $dailyMedia->media_path) }}" alt="{{ $dailyMedia->title }}">
-            {{-- <img src="{{ asset('assets/img/test.jpg') }}" alt="تصویر نمونه"> --}}
+            <img src="{{ asset('storage/' . $media_image->media_path) }}" alt="{{ $media_image->title }}"
+                style="max-width: 100%;">
         </div>
     </div>
-@endif
-    <!-- ویدیو -->
+    @else
+    <div class="media-box">
+        <div class="media-header">تصویر شاخص روز</div>
+        <div class="media-content">
+            <p>تصویر شاخصی برای امروز یافت نشد</p>
+        </div>
+    </div>
+    @endif
+
+@if($media_video && $media_video->media_type === 'video' && Str::startsWith($media_video->media_path, ['http://', 'https://']))
     <div class="media-box">
         <div class="media-header">ویدیو شاخص روز</div>
         <div class="media-content">
-            <video controls>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-            </video>
+            <div class="video-wrapper">
+                <iframe
+                    src="{{ convertToEmbed($media_video->media_path) }}"
+                    frameborder="0"
+                    allowfullscreen
+                    style="width: 100%; aspect-ratio: 16/9;">
+                </iframe>
+            </div>
         </div>
     </div>
+@else
+    <div class="media-box">
+        <div class="media-header">ویدیو شاخص روز</div>
+        <div class="media-content">
+            <p>ویدیو شاخصی برای امروز یافت نشد</p>
+        </div>
+    </div>
+@endif
+
+
+
 </section>
 
 
 
-
-
-
-{{-- start pishnehadi --}}
-
-@if($media)
-    <div class="daily-media">
-        <h2>{{ $media->title }}</h2>
-        <p>{{ $media->lead }}</p>
-
-        @if($media->media_type === 'image')
-            <img src="{{ asset('storage/' . $media->media_path) }}" alt="{{ $media->title }}" style="max-width: 100%;">
-        @elseif($media->media_type === 'video')
-            @if(Str::startsWith($media->media_path, ['http', 'https']))
-                {{-- ویدیو از لینک خارجی (یوتیوب، آپارات و...) --}}
-                <div class="video-wrapper">
-                    <iframe
-                        src="{{ convertToEmbed($media->media_path) }}"
-                        frameborder="0"
-                        allowfullscreen
-                        style="width: 100%; aspect-ratio: 16/9;">
-                    </iframe>
-                </div>
-            @else
-                {{-- ویدیو آپلودی --}}
-                <video controls style="max-width: 100%;">
-                    <source src="{{ asset('storage/' . $media->media_path) }}" type="video/mp4">
-                    مرورگر شما از پخش ویدیو پشتیبانی نمی‌کند.
-                </video>
-            @endif
-        @endif
-    </div>
-@endif
-
-{{-- end pishnehadi --}}
 
 
 

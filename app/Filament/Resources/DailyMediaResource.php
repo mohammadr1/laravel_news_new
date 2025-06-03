@@ -13,8 +13,10 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\{TextInput, Textarea, FileUpload, Select, Toggle, DateTimePicker};
+use Filament\Resources\Pages\EditRecord;
 use Filament\Tables\Columns\{TextColumn, IconColumn, ImageColumn, ToggleColumn};
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Carbon;
 
 class DailyMediaResource extends Resource
 {
@@ -28,57 +30,67 @@ class DailyMediaResource extends Resource
     protected static ?string $navigationLabel = 'ویدیو / تصویر شاخص روز';      // عنوان در سایدبار
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                TextInput::make('title')->required()->label('عنوان'),
-                Textarea::make('lead')->label('لید')->rows(3),
+{
+    return $form
 
-                Select::make('media_type')
-                    ->options([
-                        'image' => 'تصویر',
-                        'video' => 'ویدیو',
-                    ])
-                    ->required()
-                    ->live(), // برای ری‌اکتیو بودن تغییرات
+    ->schema([
+        TextInput::make('title')
+            ->required()
+            ->label('عنوان'),
 
-                Toggle::make('is_external')->label('ویدیو از لینک خارجی است؟')
-                    ->visible(fn (Forms\Get $get) => $get('media_type') === 'video')
-                    ->live(),
+        Textarea::make('lead')
+            ->label('لید')
+            ->rows(3),
 
-                TextInput::make('media_path')
-                    ->label('لینک ویدیو (آپارات / یوتیوب)')
-                    ->visible(fn (Forms\Get $get) => $get('media_type') === 'video' && $get('is_external'))
-                    ->required(fn (Forms\Get $get) => $get('media_type') === 'video' && $get('is_external')),
+        Select::make('media_type')
+            ->options([
+                'image' => 'تصویر',
+                'video' => 'ویدیو (فقط لینک خارجی)',
+            ])
+            ->required()
+            ->live()
+            ->disabled(fn ($livewire) => $livewire instanceof EditRecord),
 
-                FileUpload::make('media_path')
-                    ->label('آپلود تصویر یا ویدیو')
-                    ->disk('public')
-                    ->directory('daily-media')
-                    ->visible(fn (Forms\Get $get) => !$get('is_external'))
-                    ->required(fn (Forms\Get $get) => !$get('is_external')),
+        FileUpload::make('image_upload')
+            ->label('آپلود تصویر')
+            ->disk('public')
+            ->directory('daily-media')
+            ->preserveFilenames()
+            ->acceptedFileTypes(['image/*'])
+            ->visible(fn (Forms\Get $get) => $get('media_type') === 'image')
+            ->required(fn (Forms\Get $get) => $get('media_type') === 'image')
+            ->disabled(fn ($livewire) => $livewire instanceof EditRecord),
 
-                Toggle::make('status')
-                    ->label('فعال')
-                    ->default(true),
+        TextInput::make('video_link')
+            ->label('لینک ویدیو (آپارات / یوتیوب)')
+            ->placeholder('https://www.aparat.com/v/abc123')
+            ->visible(fn (Forms\Get $get) => $get('media_type') === 'video')
+            ->required(fn (Forms\Get $get) => $get('media_type') === 'video')
+            ->url()
+            ->rules(['starts_with:https://www.aparat.com,https://www.youtube.com,https://youtu.be'])
+            ->disabled(fn ($livewire) => $livewire instanceof EditRecord),
 
-                DateTimePicker::make('published_at')
-                ->label('تاریخ انتشار')
-                ->jalali(),
+        Toggle::make('status')
+            ->label('فعال')
+            ->default(true),
+
+        DateTimePicker::make('published_at')
+            ->label('تاریخ انتشار')
+            ->default(Carbon::now()) // مقدار پیش‌فرض: زمان حال
+            ->jalali(),
             ]);
-    }
+}
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('title')->label('عنوان')->searchable(),
-                TextColumn::make('media_type')->label('نوع'),
-                TextColumn::make('published_at')->label('انتشار')->dateTime()
-                ->date() // ✅ نمایش به‌صورت تاریخ
-                ->when(App::isLocale('fa'), fn (TextColumn $column) => $column->jalaliDate()),
-                ToggleColumn::make('status')->label('وضعیت'),
-            ])->defaultSort('published_at', 'desc')
+        return $table->columns([
+            Tables\Columns\TextColumn::make('title')->label('عنوان')->searchable(),
+            Tables\Columns\TextColumn::make('media_type')->label('نوع'),
+            Tables\Columns\IconColumn::make('status')->boolean()->label('فعال'),
+            // Tables\Columns\TextColumn::make('published_at')->label('تاریخ انتشار')->jalali(),
+        ])
+        ->defaultSort('published_at', 'desc')
+        ->filters([])
             ->filters([
                 //
             ])
@@ -107,4 +119,6 @@ class DailyMediaResource extends Resource
             'edit' => Pages\EditDailyMedia::route('/{record}/edit'),
         ];
     }
+
+
 }

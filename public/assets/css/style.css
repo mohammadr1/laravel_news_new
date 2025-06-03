@@ -15,7 +15,7 @@ body {
     font-style: normal;
   }
 @font-face {
-    font-family: 'vazir';
+    font-family: 'vazir-thin';
     src: url('/assets/fonts/vazir/Vazir-Thin-FD-WOL.woff') format('woff'),
          url('/assets/fonts/vazir/Vazir-Thin-FD-WOL.woff2') format('woff2');
     font-weight: 100;
@@ -24,7 +24,7 @@ body {
 }
 
 @font-face {
-    font-family: 'vazir';
+    font-family: 'vazir-light';
     src: url('/assets/fonts/vazir/Vazir-Light-FD-WOL.woff') format('woff'),
          url('/assets/fonts/vazir/Vazir-Light-FD-WOL.woff2') format('woff2');
     font-weight: 300;
@@ -33,7 +33,7 @@ body {
 }
 
 @font-face {
-    font-family: 'vazir';
+    font-family: 'vazir-fd';
     src: url('/assets/fonts/vazir/Vazir-FD-WOL.woff') format('woff'),
          url('/assets/fonts/vazir/Vazir-FD-WOL.woff2') format('woff2');
     font-weight: 400;
@@ -42,7 +42,7 @@ body {
 }
 
 @font-face {
-    font-family: 'vazir';
+    font-family: 'vazir-medium';
     src: url('/assets/fonts/vazir/Vazir-Medium-FD-WOL.woff') format('woff'),
          url('/assets/fonts/vazir/Vazir-Medium-FD-WOL.woff2') format('woff2');
     font-weight: 500;
@@ -51,10 +51,10 @@ body {
 }
 
 @font-face {
-    font-family: 'vazir';
+    font-family: 'vazir_bold';
     src: url('/assets/fonts/vazir/Vazir-Bold-FD-WOL.woff') format('woff'),
          url('/assets/fonts/vazir/Vazir-Bold-FD-WOL.woff2') format('woff2');
-    font-weight: 700;
+    font-weight: 800;
     font-style: normal;
     font-display: swap;
 }
@@ -79,10 +79,16 @@ h1 {
 */
 
 * , p, span, a{
-    font-family: 'vazir', sans-serif !important;
+    font-family: 'vazir-light', sans-serif !important;
     text-decoration: none !important;
 }
 
+.font-vazir-light{
+    font-family: 'vazir-light', sans-serif !important;
+}
+.font-vazir-bold{
+    font-family: 'vazir_bold', sans-serif !important;
+}
   header {
     background-color: #333;
     color: white;

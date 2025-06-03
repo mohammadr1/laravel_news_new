@@ -52,15 +52,25 @@ class HomeController extends Controller
     //     }
     // }
 
-        $media = DailyMedia::where('status', true)
+        $media_video = DailyMedia::where('status', true)
             ->where(function ($query) {
-                $query->whereNull('published_at')
+                $query->whereNotNull('published_at')
                       ->orWhere('published_at', '<=', now());
             })
+            ->where('media_type', 'video')
+            ->orderByDesc('published_at')
+            ->first();
+
+        $media_image = DailyMedia::where('status', true)
+            ->where(function ($query) {
+                $query->whereNotNull('published_at')
+                      ->orWhere('published_at', '<=', now());
+            })
+            ->where('media_type', 'image')
             ->orderByDesc('published_at')
             ->first();
 
 
-    return view('customer.home', compact('media'));
+    return view('customer.home', compact('media_image', 'media_video'));
     }
 }

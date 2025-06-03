@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Container\Attributes\Tag;
+use App\Models\Tag;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Str;
@@ -23,7 +23,7 @@ class News extends Model
         'author_id',
         'published_at',
         'category_id',
-        'tags',
+        // 'tags',
         'position',
         'status',
         'views',
@@ -62,9 +62,8 @@ class News extends Model
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'news_tag');
     }
-
 
     protected static function boot()
     {

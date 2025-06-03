@@ -46,7 +46,9 @@
                     <h1 class="news-title">{{ $news->title }}</h1>
                     <p class="news-subtitle">{{ $news->subtitle }}</p>
 
-                    <p class="news-body text-justify">{!! preg_replace('/<figcaption[^>]*>.*?<\/figcaption>/is', '', $news->body) !!}</p>
+                    <div class="news-body justify-text">
+                        {!! preg_replace('/<figcaption[^>]*>.*?<\/figcaption>/is', '' , $news->body) !!}
+                    </div>
                 </div>
                 <section class="feedback-section">
                     <div class="feedback-box">
@@ -58,14 +60,15 @@
             </div>
         </section>
 
-        <section class="feedback-section shadow">
-            <div class="feedback-box-link">
+
+        <section class="feedback-section shadow p-4 rounded bg-white mt-3">
+            <div class="feedback-box">
 
                 @php
                 $shortUrl = route('short.redirect', ['code' => $news->short_link]);
                 @endphp
 
-                <div style="margin-top: 16px;">
+                <div>
                     <h5>لینک کوتاه خبر</h3>
                         <section>
                             <small id="copyMessage" style="margin-left: 10px; color: green; display: none;">کپی شد
@@ -97,13 +100,25 @@
 
             </div>
         </section>
-
-        <section class="feedback-section shadow">
-            <div class="feedback-box-link">
-                <h5>برچسب‌ها</h3>
-                    {{ is_array($news->tags) ? implode('، ', $news->tags) : $news->tags }}
+        <section class="feedback-section shadow p-4 rounded bg-white mt-3">
+            <div class="feedback-box">
+                <h5 class="mb-3 font-bold text-gray-800">برچسب‌ها</h5>
+                @if($news->tags && $news->tags->count())
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($news->tags as $tag)
+                    <a href="{{ route('customer.tags.show', $tag->id) }}"
+                        class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-200">
+                        {{ $tag->name }}
+                    </a>
+                    @endforeach
+                </div>
+                @else
+                <p class="text-gray-500">بدون برچسب</p>
+                @endif
             </div>
         </section>
+
+
 
     </div>
 
@@ -262,7 +277,7 @@
             function fetchPrayerTimes(city) {
                 document.getElementById("location-name").textContent = city.nameFa;
 
-                fetch(`https://api.aladhan.com/v1/timings?latitude=${city.lat}&longitude=${city.lon}&method=8`)
+                fetch(`https://api.aladhan.com/v1/timings?latitude=${city.lat}&longitude=${city.lon}&method=7`)
                     .then(res => res.json())
                     .then(data => {
                         const timings = data.data.timings;
@@ -291,6 +306,9 @@
                     fetchPrayerTimes(defaultCity);
                 }
             );
+
+            // const defaultCity = khorasanCities.find(c => c.nameEn === "Bojnord");
+            // fetchPrayerTimes(defaultCity);
 
             // فعال‌سازی تولتیپ‌ها بعد از بارگذاری کامل
             const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');

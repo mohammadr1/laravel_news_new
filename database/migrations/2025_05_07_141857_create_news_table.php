@@ -26,7 +26,7 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->timestamp('published_at')->nullable();
-            $table->json('tags')->nullable(); // ✅ فیلد تگ‌ها به صورت JSON
+            // $table->json('tags')->nullable(); // ✅ فیلد تگ‌ها به صورت JSON
             $table->enum('position', ['slider', 'slider_side', 'slider_bottom'])->default('slider_bottom');
             $table->boolean('status')->default(1);
             $table->enum('position', ['slider', 'slider_side', 'slider_bottom'])->default('slider_bottom');

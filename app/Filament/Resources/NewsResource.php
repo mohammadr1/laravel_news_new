@@ -26,7 +26,9 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\NewsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NewsResource\RelationManagers;
+use App\Models\Tag;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 class NewsResource extends Resource
 {
@@ -97,11 +99,27 @@ public static function form(Form $form): Form
             //     ->relationship('author', 'name')
             //     ->required(),
 
-            TagsInput::make('tags')
-                ->label('برچسب‌ها'),
+           Select::make('tags')
+                ->label('برچسب‌ها')
+                ->multiple()
+                ->relationship('tags', 'name')
+                ->searchable()
+                ->preload()
+                ->createOptionForm([
+                    TextInput::make('name')
+                        ->label('نام تگ')
+                        ->required()
+                        ->rules(['unique:tags,name']), // ✅ اعتبارسنجی یکتا بودن
+                ])
+                ->createOptionUsing(function (array $data) {
+                    return Tag::create($data);
+                }),
+
+
 
             DateTimePicker::make('published_at')
                 ->label('تاریخ انتشار')
+                ->default(Carbon::now()) // مقدار پیش‌فرض: زمان حال
                 ->jalali()
                 ->required(),
 
@@ -116,7 +134,7 @@ public static function form(Form $form): Form
                         1 => 'منتشر شده',
                         2 => 'آرشیو شده',
                     ])
-                    ->default(0)
+                    ->default(1)
                     ->required(),
 
                     Select::make('position')

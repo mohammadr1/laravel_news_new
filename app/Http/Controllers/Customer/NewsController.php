@@ -13,10 +13,13 @@ class NewsController extends Controller
 {
     public function show(News $news)
     {
+        $news->load('tags');
+
         $categories = Category::where('status', 1)->withCount('news')->get();
 
         $news->increment('views');
 
+// dd($news->tags);
         return view('customer.news.show', compact('news', 'categories'));
     }
 

@@ -51,7 +51,24 @@ ul {
 }
 
 
+.justify-text,
+.justify-text > * {
+    text-align: justify !important;
+    line-height: 1.6 !important;
+    padding: 0 5px;
+}
 
+
+.tag-item {
+    display: inline-block;
+    background-color: #e0f0ff;
+    color: #0366d6;
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin: 0 5px 5px 0;
+    font-size: 0.9rem;
+    cursor: default;
+}
 
 
 

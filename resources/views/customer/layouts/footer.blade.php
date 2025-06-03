@@ -1,15 +1,15 @@
 <div class="row">
     <!-- ستون درباره ما -->
     <div class="col-md-4 mb-3">
-        <h5>درباره ما</h5>
+        <h5 class="font-vazir-bold">درباره ما</h5>
         <p class="small">
            {{ $setting->footer_about }}
         </p>
     </div>
 
     <!-- ستون لینک های سریع -->
-    <div class="col-md-4 mb-3">
-        <h5>لینک‌های سریع</h5>
+    <div class="col-md-3 mb-3">
+        <h5 class="font-vazir-bold">لینک‌های سریع</h5>
         <ul class="list-unstyled">
             <li><a href="#" class="footer-link">خانه</a></li>
             <li><a href="#" class="footer-link">آرشیو</a></li>
@@ -19,8 +19,8 @@
     </div>
 
     <!-- ستون شبکه های اجتماعی -->
-    <div class="col-md-4 mb-3">
-        <h5>ما را دنبال کنید</h5>
+    <div class="col-md-3 mb-3">
+        <h5 class="font-vazir-bold">ما را دنبال کنید</h5>
         <div>
             <ul class="list-unstyled">
                 @foreach($socials as $social)
@@ -36,6 +36,15 @@
                     جوان</i></a>
             <a href="#" class="footer-link me-3 fs-4"><i class="bi bi-twitter"></i></a>
             <a href="#" class="footer-link fs-4"><i class="bi bi-github"></i></a> --}}
+        </div>
+    </div>
+
+        <div class="col-md-2 mb-3">
+        <h5 class="font-vazir-bold">مجوزها</h5>
+        <div>
+            <a href="https://e-rasaneh.ir/Certificate/76599" target="_blank">
+            <img src="{{ asset('assets/img/mojavez.jpg') }}" width="100" />
+            </a>
         </div>
     </div>
 </div>
