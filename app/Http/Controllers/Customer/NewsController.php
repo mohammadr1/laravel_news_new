@@ -18,8 +18,9 @@ class NewsController extends Controller
         $categories = Category::where('status', 1)->withCount('news')->get();
 
         $news->increment('views');
+        
 
-// dd($news->tags);
+
         return view('customer.news.show', compact('news', 'categories'));
     }
 

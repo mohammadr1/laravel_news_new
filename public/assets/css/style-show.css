@@ -1,13 +1,15 @@
 /* start image top news */
 .feedback-box {
-    background-color: #fff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    /* background-color: #fff; */
+    /* border-radius: 16px; */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); */
     overflow: hidden;
     transition: all 0.3s ease;
-    padding: 0; /* حذف padding از خود باکس */
+    /* padding: 0; حذف padding از خود باکس */
 }
-
+.feedback-box .tag-item {
+    margin: 5px;
+}
 .feedback-image-wrapper {
     width: 100%;
     height: auto; /* یا هر ارتفاع دلخواه */

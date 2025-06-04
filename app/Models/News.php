@@ -24,6 +24,7 @@ class News extends Model
         'published_at',
         'category_id',
         // 'tags',
+        'short_link',
         'position',
         'status',
         'views',
@@ -44,7 +45,7 @@ class News extends Model
 
     protected $casts = [
         'published_at' => 'datetime',
-        'tags' => 'array',
+        // 'tags' => 'array',
     ];
 
     public function getRouteKeyName()

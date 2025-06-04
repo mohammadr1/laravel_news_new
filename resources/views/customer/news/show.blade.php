@@ -50,17 +50,18 @@
                         {!! preg_replace('/<figcaption[^>]*>.*?<\/figcaption>/is', '' , $news->body) !!}
                     </div>
                 </div>
-                <section class="feedback-section">
+                {{-- <section class="feedback-section">
                     <div class="feedback-box">
                         <div class="feedback-image-wrapper">
 
                         </div>
                     </div>
-                </section>
+                </section> --}}
             </div>
         </section>
 
 
+        
         <section class="feedback-section shadow p-4 rounded bg-white mt-3">
             <div class="feedback-box">
 
@@ -107,7 +108,7 @@
                 <div class="flex flex-wrap gap-2">
                     @foreach ($news->tags as $tag)
                     <a href="{{ route('customer.tags.show', $tag->id) }}"
-                        class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-200">
+                    class="tag-item bg-blue-100 cursor-pointer text-blue-800 px-3 py-1 rounded-full text-sm hover:bg-blue-200">
                         {{ $tag->name }}
                     </a>
                     @endforeach
