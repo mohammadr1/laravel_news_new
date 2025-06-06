@@ -29,7 +29,6 @@ return new class extends Migration
             // $table->json('tags')->nullable(); // ✅ فیلد تگ‌ها به صورت JSON
             $table->enum('position', ['slider', 'slider_side', 'slider_bottom'])->default('slider_bottom');
             $table->boolean('status')->default(1);
-            $table->enum('position', ['slider', 'slider_side', 'slider_bottom'])->default('slider_bottom');
             $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
         });

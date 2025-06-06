@@ -3,7 +3,7 @@
     <div class="col-md-4 mb-3">
         <h5 class="font-vazir-bold">درباره ما</h5>
         <p class="small">
-           {{ $setting->footer_about }}
+           {{ $setting->footer_about ?? null }}
         </p>
     </div>
 

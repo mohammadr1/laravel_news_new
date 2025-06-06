@@ -44,16 +44,22 @@ class SiteComposer
         $setting = SiteSetting::first();
     
         // decode JSON to array
-        $socials = $setting->footer_social_links;
+        $socials = $setting->footer_social_links ?? null;
 
         $categories = Category::where('status', 1)->withCount('news')->get();
 
 
     // add https to url
-    foreach ($socials as &$social) {
-        if (!Str::startsWith($social['url'], ['http://', 'https://'])) {
-            $social['url'] = 'https://' . $social['url'];
+
+
+    if (is_array($socials)) {
+        foreach ($socials as &$social) {
+            if (!Str::startsWith($social['url'], ['http://', 'https://'])) {
+                $social['url'] = 'https://' . $social['url'];
+            }
         }
+    } else {
+        $socials = []; // خالی نگه می‌داریم تا در view مشکلی ایجاد نشه
     }
         $view->with(compact('sliders', 'leftSliderNews', 'bottomSliderNews', 'messages', 'setting', 'socials', 'categories'));
     }

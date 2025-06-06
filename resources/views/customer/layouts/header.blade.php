@@ -2,14 +2,16 @@
     <div class="container-fluid d-flex justify-content-between align-items-center">
 
         {{-- لوگو --}}
-        @if($setting->logo_type == 'image')
-            <a class="navbar-brand me-3" href="{{ env('APP_URL') }}">
-                <img src="{{ env('APP_URL') . '/storage/' . $setting->logo_image }}" alt="لوگو" style="height: 40px;">
-            </a>
-        @else
-            <a class="navbar-brand me-3" href="{{ env('APP_URL') }}">
-                <p class="mb-0 text-white">{{ $setting->logo_text }}</p>
-            </a>
+        @if($setting)
+            @if($setting->logo_type == 'image')
+                <a class="navbar-brand me-3" href="{{ env('APP_URL') }}">
+                    <img src="{{ env('APP_URL') . '/storage/' . $setting->logo_image }}" alt="لوگو" style="height: 40px;">
+                </a>
+            @else
+                <a class="navbar-brand me-3" href="{{ env('APP_URL') }}">
+                    <p class="mb-0 text-white">{{ $setting->logo_text }}</p>
+                </a>
+            @endif
         @endif
 
         {{-- دکمه منو در موبایل --}}
