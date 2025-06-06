@@ -1,20 +1,29 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminDashboardController;
-use App\Http\Controllers\Customer\HomeController;
-use App\Http\Controllers\customer\NewsController;
-use App\Http\Controllers\customer\TagController;
-use App\Http\Controllers\ProfileController;
 use App\Models\News;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Customer\TagController;
+use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\Customer\NewsController;
+use App\Http\Controllers\Customer\SearchController;
+use App\Http\Controllers\Customer\CategoryController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 
 
 
+// صفحه اصلی سایت
 Route::get('/', [HomeController::class, 'home'])->name('customer.home');
-// Route::get('/news/{slug}', [NewsController::class, 'show'])->name('customer.news.show');
-Route::get('/news/{news}', [NewsController::class, 'show'])->name('customer.news.show');
 
-Route::get('/{category:slug}', [HomeController::class, 'home'])->name('customer.home');
+// صفحه یک دسته‌بندی خاص
+Route::get('/category/{category:slug}', [CategoryController::class, 'show'])->name('customer.category.show');
+
+// صفحه یک خبر خاص
+Route::get('/news/{news:slug}', [NewsController::class, 'show'])->name('customer.news.show');
+
+// صفحه تگ خاص
+Route::get('/tags/{tags:name}', [TagController::class, 'show'])->name('customer.news.tags');
 
 // Route::prefix('admin')->namespace('Admin')->group(function(){
 //     Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.home');
@@ -26,13 +35,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/search', [SearchController::class, 'index'])->name('customer.search');
+
 
 Route::get('/s/{code}', function ($code) {
     $news = News::where('short_link', $code)->firstOrFail();
     return redirect()->route('customer.news.show', $news);
 })->name('short.redirect');
 
-// tags
-Route::get('/tags/{tag}', [TagController::class, 'show'])->name('customer.tags.show');
 
 require __DIR__.'/auth.php';

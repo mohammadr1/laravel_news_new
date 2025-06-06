@@ -2,11 +2,12 @@
 
 namespace App\Http\View\Composers;
 
-use Illuminate\View\View;
+use Carbon\Carbon;
 use App\Models\News;
 use App\Models\Message;
+use App\Models\Category;
+use Illuminate\View\View;
 use App\Models\SiteSetting;
-use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class SiteComposer
@@ -41,9 +42,12 @@ class SiteComposer
             ->get();
 
         $setting = SiteSetting::first();
+    
+        // decode JSON to array
+        $socials = $setting->footer_social_links;
 
-    // decode JSON to array
-    $socials = $setting->footer_social_links;
+        $categories = Category::where('status', 1)->withCount('news')->get();
+
 
     // add https to url
     foreach ($socials as &$social) {
@@ -51,6 +55,6 @@ class SiteComposer
             $social['url'] = 'https://' . $social['url'];
         }
     }
-        $view->with(compact('sliders', 'leftSliderNews', 'bottomSliderNews', 'messages', 'setting', 'socials'));
+        $view->with(compact('sliders', 'leftSliderNews', 'bottomSliderNews', 'messages', 'setting', 'socials', 'categories'));
     }
 }

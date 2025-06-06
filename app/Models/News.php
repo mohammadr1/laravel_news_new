@@ -12,7 +12,7 @@ class News extends Model
     use HasFactory;
 
     protected $fillable = [
-        'on_tite',
+        'on_titr',
         'title',
         'slug',
         'subtitle',

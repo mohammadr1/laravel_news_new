@@ -12,6 +12,27 @@
     <div id="datetime" class="text-center"></div>
 </div>
 
+<style>
+    #datetime{
+        font-size: 12px;
+        margin: 0 auto;
+    }
+
+    #datetime > span{
+        margin-right: 15px;
+    }
+
+
+     @media (min-width: 768px) {
+        #datetime{
+            font-size: 11px !important;
+            margin: 0 auto !important;
+            margin-right: 0 !important;
+        }
+      }
+</style>
+
+
 <script>
 function toHijri(gDate) {
     let jd = Math.floor((gDate - new Date(622, 6, 16)) / 86400000) + 1948439.5;
@@ -49,9 +70,9 @@ updateDateTime();
     @include('customer.layouts.theme')
 
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top p-0">
+        {{-- <nav class="navbar navbar-expand-md navbar-dark fixed-top p-0"> --}}
             @include('customer.layouts.header')
-        </nav>
+        {{-- </nav> --}}
     </header>
 
 
